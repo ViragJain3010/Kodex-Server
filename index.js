@@ -1,17 +1,16 @@
-// npm run dev --> Build from next 
-
-const express = require('express');
-const path = require('path');
-const fs = require('fs');
-const next = require('next');
+import express from 'express';
+import path from 'path';
+import fs from 'fs';
+import next from 'next';
 
 // Import the API app
-const apiApp = require('./api');
+import apiApp from './api/index.js';
 
 const PORT = process.env.PORT || 3001;
 
 // Temp directory for code files
-const tempDir = path.join(__dirname, 'temp');
+const __dirname = path.dirname(new URL(import.meta.url).pathname);  // Correctly get the directory
+const tempDir = path.join(__dirname, 'temp');  // Now this will point to the correct directory
 if (!fs.existsSync(tempDir)) {
   fs.mkdirSync(tempDir);
 }
