@@ -1,8 +1,8 @@
 // server/utils/docker.js
-const Docker = require("dockerode");
-const fs = require("fs").promises;
-const path = require("path");
-const { v4: uuidv4 } = require("uuid");
+import Docker from "dockerode";
+import fs from "fs/promises";
+import path from "path";
+import { v4 as uuidv4 } from "uuid";
 
 class DockerRunner {
   constructor() {
@@ -37,6 +37,7 @@ class DockerRunner {
     const { docker: dockerConfig, execution, settings } = languageConfig;
 
     // Create temporary directory for code
+    const __dirname = path.dirname(new URL(import.meta.url).pathname);
     const codeDir = path.join(__dirname, "..", "temp", containerId);
     await fs.mkdir(codeDir, { recursive: true });
 
@@ -68,7 +69,10 @@ class DockerRunner {
       Image: dockerConfig.image + ":latest",
       Cmd: settings.requiresCompilation
         ? ["compile", `${execution.compileCommand}`, `${execution.command}`]
-        : [execution.command,`${execution.filePrefix}${languageConfig.extension}`],
+        : [
+            execution.command,
+            `${execution.filePrefix}${languageConfig.extension}`,
+          ],
       WorkingDir: dockerConfig.workDir,
       HostConfig: {
         Memory: memoryBytes,
@@ -207,4 +211,4 @@ class DockerRunner {
   }
 }
 
-module.exports = new DockerRunner();
+export default new DockerRunner();

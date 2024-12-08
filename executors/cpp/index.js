@@ -1,5 +1,5 @@
 // server/executors/cpp/index.js
-const BaseExecutor = require('../baseExecutor');
+import BaseExecutor from "../baseExecutor.js";
 
 class CppExecutor extends BaseExecutor {
   constructor() {
@@ -26,4 +26,4 @@ class CppExecutor extends BaseExecutor {
   }
 }
 
-module.exports = CppExecutor;
+export default CppExecutor

@@ -1,28 +1,5 @@
 FROM gcc:latest
 
-# # Install common utilities
-# RUN apt-get update && apt-get install -y \
-#     curl \
-#     procps \
-#     && rm -rf /var/lib/apt/lists/*
-
-# # Create working directory
-# WORKDIR /app
-
-# # Create a non-root user
-# RUN useradd -m coderunner && \
-#     chown -R coderunner:coderunner /app
-
-# # Copy run script
-# COPY run.sh /run.sh
-# RUN chmod +x /run.sh
-
-# USER coderunner
-# ENTRYPOINT ["/run.sh"]
-
-# Use the latest gcc image
-# FROM ubuntu:latest
-
 # Install common utilities
 RUN apt-get update && apt-get install -y \
     curl \

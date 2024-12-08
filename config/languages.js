@@ -99,7 +99,7 @@ const languages = {
  * Returns a list of supported languages by name and key.
  * @returns {Array<{ key: string, name: string }>} - Array of supported language keys and names.
  */
-function getSupportedLanguages() {
+export function getSupportedLanguages() {
   return Object.keys(languages).map((key) => ({
     key,
     name: languages[key].name,
@@ -111,7 +111,7 @@ function getSupportedLanguages() {
  * @param {string} language - The language key, e.g., "javascript", "python", or "cpp".
  * @returns {object|null} - The language configuration object or null if not found.
  */
-function getLanguageConfig(language) {
+export function getLanguageConfig(language) {
   return languages[language] || null;
 }
 
@@ -120,13 +120,8 @@ function getLanguageConfig(language) {
  * @param {string} language - The language key to validate.
  * @returns {boolean} - True if the language is supported, false otherwise.
  */
-function validateLanguage(language) {
+export function validateLanguage(language) {
   return Object.hasOwnProperty.call(languages, language);
 }
 
-module.exports = {
-  languages,
-  getLanguageConfig,
-  validateLanguage,
-  getSupportedLanguages,
-};
+export { languages };

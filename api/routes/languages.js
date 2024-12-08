@@ -1,7 +1,8 @@
 // server/api/routes/languages.js
-const express = require('express');
+import express from 'express';
+import { validateLanguage, getLanguageConfig, getSupportedLanguages } from '../../config/languages.js';
+
 const router = express.Router();
-const { validateLanguage, getLanguageConfig, getSupportedLanguages } = require('../../config/languages');
 
 // Get list of all supported languages
 router.get('/languages', (req, res) => {
@@ -72,4 +73,4 @@ router.get('/languages/:lang', async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;

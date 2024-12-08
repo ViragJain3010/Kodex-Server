@@ -1,5 +1,5 @@
 // server/executors/python/index.js
-const BaseExecutor = require('../baseExecutor');
+import BaseExecutor from "../baseExecutor.js";
 
 class PythonExecutor extends BaseExecutor {
   constructor() {
@@ -13,4 +13,4 @@ class PythonExecutor extends BaseExecutor {
   }
 }
 
-module.exports = PythonExecutor;
+export default PythonExecutor

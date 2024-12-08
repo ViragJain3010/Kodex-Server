@@ -1,8 +1,9 @@
 // server/api/routes/test.js
-const express = require('express');
+import express from 'express';
+import {getLanguageConfig } from '../../config/languages.js';
+import dockerRunner from "../../utils/docker.js"
+
 const router = express.Router();
-const dockerRunner = require('../../utils/docker');
-const { getLanguageConfig } = require('../../config/languages');
 
 router.post('/test', async (req, res) => {
     try {
@@ -29,4 +30,4 @@ router.post('/test', async (req, res) => {
     }
 });
 
-module.exports = router;
+export default router;

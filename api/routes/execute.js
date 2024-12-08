@@ -1,8 +1,8 @@
-// server/api/routes/execute.js
-const express = require('express');
+import express from 'express';
+import ExecutorFactory from '../../executors/index.js';
+import { validateLanguage } from '../../config/languages.js';
+
 const router = express.Router();
-const ExecutorFactory = require('../../executors');
-const { validateLanguage } = require('../../config/languages');
 
 // Validation middleware
 const validateExecuteRequest = (req, res, next) => {
@@ -71,13 +71,4 @@ router.post('/execute', validateExecuteRequest, async (req, res) => {
   }
 });
 
-// Get supported languages endpoint
-router.get('/languages', (req, res) => {
-  const { getSupportedLanguages } = require('../../config/languages');
-  res.json({
-    success: true,
-    languages: getSupportedLanguages()
-  });
-});
-
-module.exports = router;
+export default router;

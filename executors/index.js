@@ -1,7 +1,6 @@
-// server/executors/index.js
-const JavaScriptExecutor = require('./javascript');
-const PythonExecutor = require('./python');
-const CppExecutor = require('./cpp');
+import JavaScriptExecutor from './javascript/index.js';
+import PythonExecutor from './python/index.js';
+import CppExecutor from './cpp/index.js';
 
 class ExecutorFactory {
   static getExecutor(language) {
@@ -18,4 +17,4 @@ class ExecutorFactory {
   }
 }
 
-module.exports = ExecutorFactory;
+export default ExecutorFactory;

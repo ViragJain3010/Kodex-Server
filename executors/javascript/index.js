@@ -1,4 +1,4 @@
-const BaseExecutor = require('../baseExecutor');
+import BaseExecutor from "../baseExecutor.js";
 
 class JavaScriptExecutor extends BaseExecutor {
   constructor() {
@@ -32,4 +32,4 @@ class JavaScriptExecutor extends BaseExecutor {
   }
 }
 
-module.exports = JavaScriptExecutor;
+export default JavaScriptExecutor

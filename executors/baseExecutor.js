@@ -1,6 +1,5 @@
-// server/executors/baseExecutor.js
-const dockerRunner = require('../utils/docker');
-const { getLanguageConfig } = require('../config/languages');
+import dockerRunner from '../utils/docker.js';
+import { getLanguageConfig } from '../config/languages.js';
 
 class BaseExecutor {
   constructor(language) {
@@ -57,4 +56,4 @@ class BaseExecutor {
   }
 }
 
-module.exports = BaseExecutor;
+export default BaseExecutor; 
