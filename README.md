@@ -2,15 +2,11 @@
 
 The **Kodex Server** is the backend service for the Kodex platform, handling code execution, API requests, and database interactions. Built with **Express.js**, **Docker**, and **Prisma**, it supports dynamic, multi-language code execution environments and integrates seamlessly with the Kodex frontend.
 
----
-
 ## Requirements
 
 - **Node.js** (version 14 or higher)
 - **Docker** (with dynamic container management support)
 - **Docker Compose**
-
----
 
 ## Setup
 
@@ -38,9 +34,8 @@ The **Kodex Server** is the backend service for the Kodex platform, handling cod
    docker compose build
    docker compose up   # For testing, if ran successfully then execute `docker compose down`
    ```
-   > **Tip:** If you encounter errors, restart the terminal and rerun the commands.
 
----
+   > **Tip:** If you encounter errors, restart the terminal and rerun the commands.
 
 ## Directory Structure
 
@@ -53,23 +48,23 @@ The **Kodex Server** is the backend service for the Kodex platform, handling cod
 - **`standalone/`**: Standalone Next.js build for the frontend (used in production).
 - **`utils/`**: Utility functions and helper classes.
 
----
-
 ## Running the Server
 
 - **Development Mode:**
+
    ```bash
    npm run dev
    ```
+
    Uses the frontend build in the `standalone` folder for testing.
 
 - **Production Mode:**
+
    ```bash
    npm start
    ```
-   Starts the backend server at `localhost:3001`. The frontend needs to be started separately in another terminal, after which it can communicate with the backend via API requests.
 
----
+   Starts the backend server at `localhost:3001`. The frontend needs to be started separately in another terminal, after which it can communicate with the backend via API requests.
 
 ## API Endpoints
 
@@ -78,6 +73,7 @@ The **Kodex Server** is the backend service for the Kodex platform, handling cod
 - **`POST /api/execute`**  
   Executes code in the specified programming language.  
   **Request Body**:
+
   ```json
   {
     "language": "python",
@@ -88,18 +84,14 @@ The **Kodex Server** is the backend service for the Kodex platform, handling cod
 
 ### **Supported Languages**
 
-- **`GET /api/languages`**  
-  Retrieves a list of supported programming languages.
+- **`GET /api/languages`** Retrieves a list of supported programming languages.
 
-- **`Get /api/languages/{language}`**
-  Retrieves the configuration of a specific language.
+- **`Get /api/languages/{language}`** Retrieves the configuration of a specific language.
 
 ### **Testing Endpoint**
 
 - **`POST /api/test`**
   A utility endpoint for server testing (development purposes only).
-
----
 
 ## Docker Configuration
 
@@ -114,14 +106,14 @@ The **Kodex Server** is the backend service for the Kodex platform, handling cod
     - `code-network`: A bridge network for communication between containers.
     > **Note:** Ensure this network is created to avoid errors.
 
-    - **Create the Docker Network**
-        Run the following command to create the network:
+    - **To Create the Docker Network**
+        Run the following command:
+
         ```bash
         docker network create code-network
         ```
-        `code-network` is the name of the network used in your docker-compose.yml file. You can replace it with any other name, but ensure consistency in your configuration.
 
----
+        `code-network` is the name of the network used in your docker-compose.yml file. You can replace it with any other name, but ensure consistency in your configuration.
 
 <!-- ## Prisma Setup
 
@@ -140,22 +132,9 @@ npx prisma generate
 npx prisma migrate dev
 ``` -->
 
----
-
 ## Middleware
 
 Custom middleware functions are implemented in the `middleware/` directory.
 
 <!-- - **Authentication Middleware:** Configured in `middleware/authMiddleware.js`.
   - Ensures requests are authorized where required. -->
-
----
-
-## Deployment Notes
-
-For deployment:
-1. Use a single deployment for both backend and frontend.
-2. Ensure Docker is configured properly on the hosting platform.
-3. Use AWS or Railway.app for simplified deployment workflows.
-
----
