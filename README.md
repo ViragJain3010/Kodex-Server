@@ -2,6 +2,10 @@
 
 The **Kodex Server** is the backend service for the Kodex platform, handling code execution, API requests, and database interactions. Built with **Express.js**, **Docker**, and **Prisma**, it supports dynamic, multi-language code execution environments and integrates seamlessly with the Kodex frontend.
 
+## Demo
+
+Check out the demonstration of the **Kodex Server** in action:
+
 ![Kodex Server Demo](./assets/kodex-demo.gif)
 
 ## Requirements
