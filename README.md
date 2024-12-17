@@ -166,17 +166,17 @@ Follow the steps below to integrate a new programming language into the system:
 ---
 
 ### **1. Docker Setup**  
-1. Inside the **[docker](server/docker)** directory, create a new folder for your language.  
+1. Inside the **[docker](/docker)** directory, create a new folder for your language.  
 2. Add a `Dockerfile` to this folder to define the environment for code execution.  
    - Ensure the Dockerfile has all the necessary tools and configurations for the language.
-   - Please see the [base Dockerfile](/server/docker/base/Dockerfile) for example.
-3. Update the **[docker-compose.yml](server/docker-compose.yml)** file:  
+   - Please see the [base Dockerfile](/docker/base/Dockerfile) for example.
+3. Update the **[docker-compose.yml](/docker-compose.yml)** file:  
    - Add a service configuration for the new language.  
    - Verify the paths for `context`, `dockerfile`, `volumes`, and `working_dir` are correct.  
 
 
 ### **2. Language Configuration**  
-Add the language details to the **[Languages.config.js](server/config/Languages.config.js)** file. Use the following structure:
+Add the language details to the **[Languages.config.js](/config/Languages.config.js)** file. Use the following structure:
 
 ```js
 languages = {
@@ -213,7 +213,7 @@ languages = {
 
 ### **3. Executor Class Setup**  
 
-1. Create a new executor class for the language inside the **[executors](server/executors)** directory.  
+1. Create a new executor class for the language inside the **[executors](/executors)** directory.  
 2. Follow the structure of the existing executor classes to implement the logic for:  
    - Code execution  
    - Handling pre- and post-execution tasks  
