@@ -1,6 +1,7 @@
 // server/api/routes/languages.js
+
 import express from 'express';
-import { validateLanguage, getLanguageConfig, getSupportedLanguages } from '../../config/languages.js';
+import { validateLanguage, getLanguageConfig, getSupportedLanguages } from '../../config/Languages.config.js';
 
 const router = express.Router();
 
@@ -8,7 +9,6 @@ const router = express.Router();
 router.get('/languages', (req, res) => {
   try {
     const languages = getSupportedLanguages();
-    console.log(languages)
     res.json({
       success: true,
       path: 'at server/api/routes/languages.js/languages/try',

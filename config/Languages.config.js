@@ -85,7 +85,7 @@ const languages = {
       compileCommand: "g++ -o program main.cpp",
       filePrefix: "main",
       defaultBoilerplate:
-        '#include <iostream>\n\nint main() {\n    std::cout << "Hello, World!" << std::endl;\n    return 0;\n}',
+        '#include <bits/stdc++.h>\n\nint main() {\n    std::cout << "Hello, World!" << std::endl;\n    return 0;\n}',
     },
     settings: {
       supportsInput: true,

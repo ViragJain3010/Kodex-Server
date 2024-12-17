@@ -1,3 +1,6 @@
+// /server/index.js  -> Utilises build from Next.js
+// npm run dev
+
 import express from 'express';
 import path from 'path';
 import fs from 'fs';
@@ -9,8 +12,8 @@ import apiApp from './api/index.js';
 const PORT = process.env.PORT || 3001;
 
 // Temp directory for code files
-const __dirname = path.dirname(new URL(import.meta.url).pathname);  // Correctly get the directory
-const tempDir = path.join(__dirname, 'temp');  // Now this will point to the correct directory
+const __dirname = path.dirname(new URL(import.meta.url).pathname); 
+const tempDir = path.join(__dirname, 'temp');
 if (!fs.existsSync(tempDir)) {
   fs.mkdirSync(tempDir);
 }

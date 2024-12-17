@@ -1,6 +1,8 @@
+// server/api/routes/execute.js
+
 import express from 'express';
 import ExecutorFactory from '../../executors/index.js';
-import { validateLanguage } from '../../config/languages.js';
+import { validateLanguage } from '../../config/Languages.config.js';
 
 const router = express.Router();
 

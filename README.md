@@ -8,6 +8,17 @@ Check out the demonstration of the **Kodex Server** in action:
 
 ![Kodex Server Demo](./assets/kodex-demo.gif)
 
+## Table of Contents
+
+- [Requirements](#requirements)
+- [Setup](#setup)
+- [Directory Structure](#directory-structure)
+- [Running the Server](#running-the-server)
+- [API Endpoints](#api-endpoints)
+- [Docker Configuration](#docker-configuration)
+- [Middleware](#middleware)
+- [How to add new Language](#how-to-add-a-new-language)
+
 ## Requirements
 
 - **Node.js** (version 14 or higher)
@@ -41,7 +52,7 @@ Check out the demonstration of the **Kodex Server** in action:
    docker compose up   # For testing, if ran successfully then execute `docker compose down`
    ```
 
-   > **Tip:** If you encounter errors, restart the terminal and rerun the commands.
+   > **Tip:** If you encounter errors,try restarting the terminal and rerun the commands.
 
 ## Directory Structure
 
@@ -101,25 +112,23 @@ Check out the demonstration of the **Kodex Server** in action:
 
 ## Docker Configuration
 
-- Docker dynamically creates and manages containers for secure, isolated code execution.
-- **Key Configuration:**
-  - `docker-compose.yml`: Defines services and networks for the backend and execution environments.
-  - **Docker Services:**
-    - `javascript-runner`: Runs JavaScript code.
-    - `python-runner`: Runs Python code.
-    - `cpp-runner`: Runs C++ code.
-  - **Docker Networks:**
-    - `code-network`: A bridge network for communication between containers.
+Docker dynamically creates and manages containers for secure, isolated code execution.
+
+**Key Configuration:**
+- `docker-compose.yml`: Defines services and networks for the backend and execution environments.
+- **Docker Services:**
+  - `javascript-runner`: Runs JavaScript code.
+  - `python-runner`: Runs Python code.
+  - `cpp-runner`: Runs C++ code.
+- **Docker Networks:**
+  - `code-network`: A bridge network for communication between containers.
     > **Note:** Ensure this network is created to avoid errors.
-
-    - **To Create the Docker Network**
-        Run the following command:
-
-        ```bash
-        docker network create code-network
-        ```
-
-        `code-network` is the name of the network used in your docker-compose.yml file. You can replace it with any other name, but ensure consistency in your configuration.
+  - **To Create the Docker Network**
+      Run the following command:
+      ```bash
+      docker network create code-network
+      ```
+      `code-network` is the name of the network used in your docker-compose.yml file. You can replace it with any other name, but ensure consistency in your configuration.
 
 <!-- ## Prisma Setup
 
@@ -144,3 +153,90 @@ Custom middleware functions are implemented in the `middleware/` directory.
 
 <!-- - **Authentication Middleware:** Configured in `middleware/authMiddleware.js`.
   - Ensures requests are authorized where required. -->
+
+## **How to Add a New Language**
+
+The language setup is divided into three parts:  
+1. **Docker Setup**  
+2. **Language Configuration**  
+3. **Executor Class Setup**
+
+Follow the steps below to integrate a new programming language into the system:
+
+---
+
+### **1. Docker Setup**  
+1. Inside the **[docker](server/docker)** directory, create a new folder for your language.  
+2. Add a `Dockerfile` to this folder to define the environment for code execution.  
+   - Ensure the Dockerfile has all the necessary tools and configurations for the language.
+   - Please see the [base Dockerfile](/server/docker/base/Dockerfile) for example.
+3. Update the **[docker-compose.yml](server/docker-compose.yml)** file:  
+   - Add a service configuration for the new language.  
+   - Verify the paths for `context`, `dockerfile`, `volumes`, and `working_dir` are correct.  
+
+
+### **2. Language Configuration**  
+Add the language details to the **[Languages.config.js](server/config/Languages.config.js)** file. Use the following structure:
+
+```js
+languages = {
+  key: { // Unique identifier for the language
+    name: "Language Name", // Display name for the dropdown
+    extension: ".ext", // File extension for the language
+
+    docker: {
+      image: "docker-image-name", // Docker image name
+      workDir: "/app", // Container working directory
+      timeout: 10000, // Max runtime in ms
+      memory: "128mb", // Memory allocation
+      cpus: "0.5", // CPU allocation
+    },
+
+    execution: {
+      command: "command", // Command to execute the code
+      compileCommand: "compile command", // Compilation command, if required
+      filePrefix: "file", // Prefix for generated code files
+      defaultBoilerplate: "code", // Default code template
+    },
+
+    settings: {
+      supportsInput: boolean, // Whether the language supports standard input
+      supportsFiles: boolean, // Whether file handling is supported
+      requiresCompilation: boolean, // Whether compilation is required
+    },
+  },
+};
+```
+
+> **Note:** Ensure all fields are correctly filled to prevent unexpected errors.
+
+
+### **3. Executor Class Setup**  
+
+1. Create a new executor class for the language inside the **[executors](server/executors)** directory.  
+2. Follow the structure of the existing executor classes to implement the logic for:  
+   - Code execution  
+   - Handling pre- and post-execution tasks  
+   - Managing inputs and outputs  
+
+### **4. Build and Test**  
+
+After completing the above steps:  
+
+1. **Build the Docker images** using the following command: 
+
+   ```sh
+   docker compose build
+   ```  
+
+2. **Test the setup** by running:  
+   ```sh
+   docker compose up
+   ```  
+   - If the containers run successfully, stop them using:  
+     ```sh
+     docker compose down
+     ```  
+
+> ### Why So Much Work for Adding a Single Language?
+> This structure ensures safety and high customization for pre- and post-code execution. It makes the system highly robust against misuse and allows complete customization of the execution environment as needed.
