@@ -17,7 +17,7 @@ Check out the demonstration of the **Kodex Server** in action:
 - [API Endpoints](#api-endpoints)
 - [Docker Configuration](#docker-configuration)
 - [Middleware](#middleware)
-- [How to add new Language](#how-to-add-a-new-language)
+- [Adding new Language Support](#adding-new-language-support)
 
 ## Requirements
 
@@ -154,7 +154,7 @@ Custom middleware functions are implemented in the `middleware/` directory.
 <!-- - **Authentication Middleware:** Configured in `middleware/authMiddleware.js`.
   - Ensures requests are authorized where required. -->
 
-## **How to Add a New Language**
+## **Adding new Language Support**
 
 The language setup is divided into three parts:  
 1. **Docker Setup**  
