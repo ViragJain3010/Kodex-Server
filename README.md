@@ -42,7 +42,7 @@ Check out the demonstration of the **Kodex Server** in action:
 
 3. **Configure the Environment:**
 
-   - Create a `.env` file in the `kodex/server` directory based on the provided `.env.example` template.
+   - Create a `.env` file in the `kodex/server` directory based on the provided [.env.example](./env.example) template.
    - Configure environment variables for database connection, Docker settings, and other server options.
 
 4. **Build and Run Docker Containers:**
@@ -57,8 +57,8 @@ Check out the demonstration of the **Kodex Server** in action:
 ## Directory Structure
 
 - **`api/`**: Express routes for handling API requests.
-- **`config/`**: Configuration files for server setup and environment variables.
-- **`docker/`**: Dockerfile and related configuration files for dynamic code execution.
+- **`config/`**: Configuration files.
+- **`docker/`**: Dockerfile and related configuration files
 - **`executors/`**: Code execution logic for supported programming languages.
 - **`middleware/`**: Custom Express middleware functions.
 - **`prisma/`**: Prisma ORM schema and client configuration.
@@ -67,7 +67,7 @@ Check out the demonstration of the **Kodex Server** in action:
 
 ## Running the Server
 
-- **Development Mode:**
+- **Production Mode:**
 
    ```bash
    npm run dev
@@ -75,7 +75,7 @@ Check out the demonstration of the **Kodex Server** in action:
 
    Uses the frontend build in the `standalone` folder for testing.
 
-- **Production Mode:**
+- **Devlopment Mode:**
 
    ```bash
    npm start
