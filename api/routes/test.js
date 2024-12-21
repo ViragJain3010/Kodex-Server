@@ -1,8 +1,8 @@
 // server/api/routes/test.js
 
 import express from 'express';
-import {getLanguageConfig } from '../../config/languages.js';
-import dockerRunner from "../../utils/docker.js"
+import {getLanguageConfig } from '../../config/Languages.config.js';
+import dockerRunner from "../../utils/Docker.js"
 
 const router = express.Router();
 

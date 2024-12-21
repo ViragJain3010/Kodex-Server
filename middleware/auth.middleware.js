@@ -1,5 +1,5 @@
 // server/middleware/authMiddleware.js
-import passport from '../config/passport.js';
+import passport from '../config/passport.config.js';
 
 export const requireAuth = (req, res, next) => {
   passport.authenticate('jwt', { session: false }, (err, user, info) => {

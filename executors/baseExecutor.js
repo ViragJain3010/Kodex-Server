@@ -1,5 +1,5 @@
-import dockerRunner from '../utils/docker.js';
-import { getLanguageConfig } from '../config/languages.js';
+import dockerRunner from '../utils/Docker.js';
+import { getLanguageConfig } from '../config/Languages.config.js';
 
 class BaseExecutor {
   constructor(language) {
