@@ -33,89 +33,89 @@ passport.use(
   )
 );
 
-// Google OAuth Strategy
-passport.use(
-  new GoogleStrategy(
-    {
-      clientID: process.env.GOOGLE_CLIENT_ID,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      callbackURL: "/api/auth/google/callback",
-    },
-    async (accessToken, refreshToken, profile, done) => {
-      try {
-        let user = await prisma.user.findFirst({
-          where: {
-            OR: [
-              {
-                providerId: profile.id,
-                authProvider: "GOOGLE",
-              },
-              { email: profile.emails[0].value },
-            ],
-          },
-        });
+// // Google OAuth Strategy
+// passport.use(
+//   new GoogleStrategy(
+//     {
+//       clientID: process.env.GOOGLE_CLIENT_ID,
+//       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+//       callbackURL: "/api/auth/google/callback",
+//     },
+//     async (accessToken, refreshToken, profile, done) => {
+//       try {
+//         let user = await prisma.user.findFirst({
+//           where: {
+//             OR: [
+//               {
+//                 providerId: profile.id,
+//                 authProvider: "GOOGLE",
+//               },
+//               { email: profile.emails[0].value },
+//             ],
+//           },
+//         });
 
-        if (!user) {
-          // Create new user
-          user = await prisma.user.create({
-            data: {
-              username: profile.displayName.replace(/\s+/g, "").toLowerCase(),
-              email: profile.emails[0].value,
-              authProvider: "GOOGLE",
-              providerId: profile.id,
-            },
-          });
-        }
+//         if (!user) {
+//           // Create new user
+//           user = await prisma.user.create({
+//             data: {
+//               username: profile.displayName.replace(/\s+/g, "").toLowerCase(),
+//               email: profile.emails[0].value,
+//               authProvider: "GOOGLE",
+//               providerId: profile.id,
+//             },
+//           });
+//         }
 
-        return done(null, user);
-      } catch (error) {
-        return done(error, false);
-      }
-    }
-  )
-);
+//         return done(null, user);
+//       } catch (error) {
+//         return done(error, false);
+//       }
+//     }
+//   )
+// );
 
-// GitHub OAuth Strategy
-passport.use(
-  new GitHubStrategy(
-    {
-      clientID: process.env.GITHUB_CLIENT_ID,
-      clientSecret: process.env.GITHUB_CLIENT_SECRET,
-      callbackURL: "/api/auth/github/callback",
-    },
-    async (accessToken, refreshToken, profile, done) => {
-      try {
-        let user = await prisma.user.findFirst({
-          where: {
-            OR: [
-              {
-                providerId:
-                  profile.id, // server/config/passport.js (continued)
-                authProvider: "GITHUB",
-              },
-              { email: profile.emails[0].value },
-            ],
-          },
-        });
+// // GitHub OAuth Strategy
+// passport.use(
+//   new GitHubStrategy(
+//     {
+//       clientID: process.env.GITHUB_CLIENT_ID,
+//       clientSecret: process.env.GITHUB_CLIENT_SECRET,
+//       callbackURL: "/api/auth/github/callback",
+//     },
+//     async (accessToken, refreshToken, profile, done) => {
+//       try {
+//         let user = await prisma.user.findFirst({
+//           where: {
+//             OR: [
+//               {
+//                 providerId:
+//                   profile.id, // server/config/passport.js (continued)
+//                 authProvider: "GITHUB",
+//               },
+//               { email: profile.emails[0].value },
+//             ],
+//           },
+//         });
 
-        if (!user) {
-          // Create new user
-          user = await prisma.user.create({
-            data: {
-              username: profile.username,
-              email: profile.emails[0].value,
-              authProvider: "GITHUB",
-              providerId: profile.id,
-            },
-          });
-        }
+//         if (!user) {
+//           // Create new user
+//           user = await prisma.user.create({
+//             data: {
+//               username: profile.username,
+//               email: profile.emails[0].value,
+//               authProvider: "GITHUB",
+//               providerId: profile.id,
+//             },
+//           });
+//         }
 
-        return done(null, user);
-      } catch (error) {
-        return done(error, false);
-      }
-    }
-  )
-);
+//         return done(null, user);
+//       } catch (error) {
+//         return done(error, false);
+//       }
+//     }
+//   )
+// );
 
 export default passport;
